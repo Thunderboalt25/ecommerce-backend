@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 class ProductViewSet(ModelViewSet):
 
-    queryset = Product.objects.all()
+    queryset = Product.objects.all().order_by("-created_at")
 
     serializer_class = ProductSerializer
 
