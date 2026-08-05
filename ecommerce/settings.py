@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     "cart",
     "orders",
     "reviews",
+     "cloudinary",
+    "cloudinary_storage",
+
 ]
 
 
@@ -159,9 +162,7 @@ STATIC_URL = "static/"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-STATICFILES_STORAGE = (
-    "whitenoise.storage.CompressedManifestStaticFilesStorage"
-)
+
 
 
 # =========================
@@ -171,7 +172,20 @@ STATICFILES_STORAGE = (
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = BASE_DIR / "media"
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": config("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": config("CLOUDINARY_API_KEY"),
+    "API_SECRET": config("CLOUDINARY_API_SECRET"),
+}
 
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # =========================
 # CUSTOM USER
